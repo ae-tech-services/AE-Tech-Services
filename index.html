@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠ Payment Reminder ⚠</title>
+    <title>Payment Reminder</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,305 +21,51 @@
             margin: auto;
             border: 2px solid red;
         }
-        .warning {
+        .title {
             color: red;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        
-        .payment-options {
-            display: flex;
-            justify-content: space-between; /* Ensures proper spacing between the items */
-            gap: 20px; /* Adds gap between the two payment options */
-            flex-wrap: wrap; /* Ensures the content wraps in smaller screen sizes */
-            margin-bottom: 20px;
-        }
-
-        .payment-option {
-            flex: 1;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .payment-option p,
-        .payment-option b {
-            margin-top: 10px; /* Adds spacing between the text and the QR code */
-            margin-bottom: 5px; /* Adds spacing between the text elements */
-        }
-
-        .payment-option img {
-            max-width: 150px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Optional: you can style the name and contact number further if needed */
-        .name {
+        .countdown {
+            font-size: 18px;
             font-weight: bold;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        .contact {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .button {
-            display: block;
-            padding: 10px;
-            margin: 10px auto;
-            text-decoration: none;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 80%;
-            text-align: center;
-        }
-        .location { background-color: #FF3333; }
-        .schedule { background-color: #FF9800; cursor: pointer; }
-        .continue { background-color: #009688; }
-
-        /* MODAL STYLING */
-        .modal {
-            display: none; /* FIXED: Now the modal is truly hidden on load */
-            position: fixed;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-            text-align: left;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        input, textarea, button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        textarea {
-            resize: none;
-            overflow: hidden;
-            word-wrap: break-word;
-            height: 80px;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            cursor: pointer;
-            width: calc(100% - 20px);
-            align-self: center;
-        }
-        button:hover {
-            background-color: #218838;
+            color: #333;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="warning">⚠ WARNING: PAYMENT DUE SOON! ⚠</div>
-        <p>Your internet subscription is about to expire. Please settle your payment immediately to avoid service disconnection.</p>
-
-        <p>You can pay via:</p>
-
-        <div class="payment-options">
-    <div class="payment-option">
-        <p>GCash</p>
-        <img src="https://i.ibb.co/Q7g3J1Pw/Gcash.jpg" alt="GCash QR">
-        <p class="name">JO*N R** P.</p>
-        <b class="contact">09676757428</b>
+        <div class="title">PAYMENT REMINDER</div>
+        <p>You will be redirected in <span id="countdown">3</span> seconds...</p>
     </div>
-    <div class="payment-option">
-        <p>Maya</p>
-        <img src="https://i.ibb.co/5Wk9mCJG/maya.jpg" alt="Maya QR">
-        <p class="name">john rey pajuyo</p>
-        <b class="contact">09676757428</b>
-    </div>
-</div>
-
-<button class="button" style="margin-top:-25px" onclick="openReceiptModal()">💳 Send Payment Receipt</button>
-        <p><strong>OR</strong></p>
-        <button class="button schedule" onclick="openModal()">📅 Schedule Payment</button>
-
-        <br>
-        <p style="color: red; font-weight: bold;">You may continue using the internet, but please settle your payment as soon as possible.</p>
-        <a href="fb://profile" class="button continue">➡ Continue Surfing</a>
-        
-        
-
-    </div>
-
-    <!-- MODAL FOR RECEIPT -->
-    <div id="receiptModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeReceiptModal()">&times;</span>
-            <h3>Send Your Payment Receipt</h3>
-
-            <label for="name">Full Name:</label>
-            <input type="text" id="receiptName" placeholder="Enter your name" required>
-
-            <label for="receipt">Upload Payment Receipt:</label>
-            <input type="file" id="paymentReceipt" accept="image/*" required>
-
-            <button onclick="sendReceiptToTelegram()">Send Receipt</button>
-        </div>
-    </div>
-
-    <!-- MODAL FOR SCHEDULING PAYMENT -->
-    <div id="scheduleModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Schedule Your Payment</h3>
-            <p>We will visit your home on the scheduled date and time you provide.</p>
-
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
-
-            <div style="display: flex; gap: 10px;">
-                <div style="flex: 1;">
-                    <label for="date">Payment Date:</label>
-                    <input type="date" id="date" required>
-                </div>
-                <div style="flex: 1;">
-                    <label for="time">Payment Time:</label>
-                    <input type="time" id="time" required>
-                </div>
-            </div>
-
-            <label for="message">Optional Message:</label>
-            <textarea id="message" placeholder="Enter any message (optional)" rows="3"></textarea>
-
-            <button onclick="sendToTelegram()">Submit</button>
-        </div>
-    </div>
-<script>
-    window.onload = function() {
-        setTimeout(function() {
-            // Subukang buksan ang Facebook App
-            window.location.href = "fb://profile";
-
-            // OPTIONAL: Fallback kung hindi naka-install ang Facebook app
-            setTimeout(function() {
-                window.location.href = "https://www.facebook.com/"; // FB web fallback
-            }, 3000); // 3-second delay bago ang fallback
-        }, 2000); // 2-second delay bago mag-redirect
-    };
-</script>
 
     <script>
-        
+        var countdown = 3; // Countdown time in seconds
+        var countdownElement = document.getElementById("countdown");
 
-        function openModal() {
-            document.getElementById('scheduleModal').style.display = 'flex';
-        }
+        function updateCountdown() {
+            countdown--;
+            countdownElement.innerText = countdown;
 
-        function closeModal() {
-            document.getElementById('scheduleModal').style.display = 'none';
-        }
-
-        function openReceiptModal() {
-            document.getElementById('receiptModal').style.display = 'flex';
-        }
-
-        function closeReceiptModal() {
-            document.getElementById('receiptModal').style.display = 'none';
-        }
-
-        function sendReceiptToTelegram() {
-            var name = document.getElementById('receiptName').value;
-            var receiptFile = document.getElementById('paymentReceipt').files[0];
-
-            if (!name || !receiptFile) {
-                alert("Please enter your name and upload the payment receipt.");
-                return;
-            }
-
-            var formData = new FormData();
-            formData.append('photo', receiptFile);
-
-            var botToken = "8016790696:AAEFp-OwVwEK--TOXqx7EtrhLlc7byRrbaQ";
-            var chatId = "-4615472979";
-            var telegramMessage = `👤 Name: ${name}\n💳 Payment Receipt Sent`;
-
-            var uploadUrl = `https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}&caption=${encodeURIComponent(telegramMessage)}`;
-            fetch(uploadUrl, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Payment receipt sent successfully!");
-                closeReceiptModal();
-            })
-            .catch(error => {
-                alert("Error sending payment receipt.");
-            });
-        }
-
-        function sendToTelegram() {
-            var name = document.getElementById('name').value;
-            var date = document.getElementById('date').value;
-            var time = document.getElementById('time').value;
-            var message = document.getElementById('message').value.trim();
-
-            if (name === "" || date === "" || time === "") {
-                alert("Please fill out all fields.");
-                return;
-            }
-
-            var botToken = "8016790696:AAEFp-OwVwEK--TOXqx7EtrhLlc7byRrbaQ";
-            var chatId = "-4615472979";
-
-            var telegramMessage = `📅 Payment Schedule Request\n\n👤 Name: ${name}\n📆 Date: ${date}\n🕒 Time: ${time}`;
-            
-            if (message !== "") {
-                telegramMessage += `\n💬 Message: ${message}`;
+            if (countdown === 0) {
+                // Open the URL in the default browser
+                var url = "https://aeservices.github.io/reminder/";
+                var win = window.open(url, "_system"); // Force open in the default browser
+                
+                // If window.open fails, use window.location.href as fallback
+                if (!win) {
+                    window.location.href = url;
+                }
             } else {
-                telegramMessage += `\n💬 Message: (No message provided)`;
+                setTimeout(updateCountdown, 1000);
             }
-
-            var telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
-
-            fetch(telegramUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        alert("Payment schedule submitted successfully!");
-                        closeModal();
-                    } else {
-                        alert("Error submitting request. Please try again.");
-                    }
-                })
-                .catch(error => {
-                    alert("Error connecting to Telegram.");
-                });
         }
+
+        // Start countdown
+        setTimeout(updateCountdown, 1000);
     </script>
 
 </body>
