@@ -43,7 +43,7 @@
     </div>
 
     <script>
-        var countdown = 3; // Countdown time in seconds
+        var countdown = 3;
         var countdownElement = document.getElementById("countdown");
 
         function updateCountdown() {
@@ -51,17 +51,23 @@
             countdownElement.innerText = countdown;
 
             if (countdown === 0) {
-                // Open the URL in the default browser
-                var url = "https://aeservices.github.io/reminder/";
-                var win = window.open(url, "_system"); // Force open in the default browser
-                
-                // If window.open fails, use window.location.href as fallback
-                if (!win) {
-                    window.location.href = url;
-                }
+                openInDefaultBrowser();
             } else {
                 setTimeout(updateCountdown, 1000);
             }
+        }
+
+        function openInDefaultBrowser() {
+            var url = "https://aeservices.github.io/reminder/";
+
+            // ✅ For Android: Open in default browser
+            var androidIntent = "intent://" + url.replace("https://", "").replace("http://", "") + "#Intent;action=android.intent.action.VIEW;scheme=https;end;";
+            window.location.href = androidIntent;
+
+            // ✅ For iPhone (iOS): Open in Safari
+            setTimeout(function() {
+                window.location.href = url;
+            }, 1000);
         }
 
         // Start countdown
