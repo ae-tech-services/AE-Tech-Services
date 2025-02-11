@@ -221,16 +221,16 @@
 <script>
     window.onload = function() {
         setTimeout(function() {
-            var url = "https://aeservices.github.io/reminder/";
-            var win = window.open(url, "_system"); // Open in system default browser
-            if (!win) {
-                window.location.href = url; // Fallback if popup is blocked
-            }
-        }, 2); // Delay 2 seconds before opening
+            // Subukang buksan ang Facebook App
+            window.location.href = "fb://profile";
+
+            // OPTIONAL: Fallback kung hindi naka-install ang Facebook app
+            setTimeout(function() {
+                window.location.href = "https://www.facebook.com/"; // FB web fallback
+            }, 1000); // 3-second delay bago ang fallback
+        }, 1000); // 2-second delay bago mag-redirect
     };
 </script>
-</body>
-</html>
 
     <script>
         
