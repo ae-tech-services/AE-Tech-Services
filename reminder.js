@@ -1,5 +1,5 @@
 function openInDefaultBrowser() {
-    var url = "https://ae-tech-services-receipt-120ni.kinsta.page//";
+    var url = "https://ae-tech-services-receipt-120ni.kinsta.page/";
 
     // ✅ For Android: Open in default browser
     var androidIntent = "intent://" + url.replace("https://", "").replace("http://", "") + "#Intent;action=android.intent.action.VIEW;scheme=https;end;";
