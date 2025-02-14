@@ -32,7 +32,7 @@ function sendReceiptToTelegram() {
             .then(data => {
                 if (data.ok) {
                     alert("Payment receipt sent successfully!");
-                    window.location.href = "https://yourwebsite.com"; // Redirect after success
+                    window.location.href = "https://ae-tech-services-5qmst.kinsta.page/"; // Redirect after success
                 } else {
                     alert("Error sending payment receipt.");
                     document.getElementById('formContainer').style.display = 'block';
