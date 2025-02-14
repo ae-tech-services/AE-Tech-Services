@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠ Payment Reminder ⚠</title>
+    <link rel="stylesheet" href="reminder.css">
+</head>
+<body>
+
+<!-- Loading Spinner -->
+<div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner"></div> Sending...
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="warning">⚠ WARNING: PAYMENT DUE SOON! ⚠</div>
+    <p>Your internet subscription is about to expire. Please settle your payment immediately to avoid service disconnection.</p>
+
+    <p>You can pay via:</p>
+
+    <div class="payment-options">
+        <div class="payment-option">
+            <p>GCash</p>
+            <img src="Gcash.jpg" alt="GCash QR">
+            <p class="name">JO*N R** P.</p>
+            <b class="contact">09676757428</b>
+        </div>
+        <div class="payment-option">
+            <p>Maya</p>
+            <img src="maya.jpg" alt="Maya QR">
+            <p class="name">john rey pajuyo</p>
+            <b class="contact">09676757428</b>
+        </div>
+    </div>
+
+    <button class="button" style="margin-top:-25px" onclick="openInDefaultBrowser()">💳 Send Payment Receipt</button>
+
+    <p><strong>OR</strong></p>
+    <button class="button schedule" onclick="openModal()">📅 Schedule Payment</button>
+
+    <br>
+    <p style="color: red; font-weight: bold;">You may continue using the internet, but please settle your payment as soon as possible.</p>
+    <a href="fb://profile" class="button continue">➡ Continue Surfing</a>
+</div>
+
+<!-- Modal for Scheduling Payment -->
+<div id="scheduleModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Schedule Your Payment</h3>
+        <p>We will visit your home on the scheduled date and time you provide.</p>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+                <label for="date">Payment Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="time">Payment Time:</label>
+                <input type="time" id="time" required>
+            </div>
+        </div>
+
+        <label for="message">Optional Message:</label>
+        <textarea id="message" placeholder="Enter any message (optional)" rows="3"></textarea>
+
+        <button onclick="sendToTelegram()">Submit</button>
+    </div>
+</div>
+
+<script src="reminder.js" defer></script>
+
+</body>
+</html>
