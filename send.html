@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Payment Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            border: 2px solid red;
+        }
+        h2 {
+            color: red;
+        }
+        input, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Spinner Style */
+        .loading-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #28a745;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="formContainer">
+        <h2>Send Payment Receipt</h2>
+        <label for="receiptName">Full Name:</label>
+        <input type="text" id="receiptName" placeholder="Enter your name" required>
+
+        <label for="paymentReceipt">Upload Payment Receipt:</label>
+        <input type="file" id="paymentReceipt" accept="image/*" required>
+
+        <button onclick="sendReceiptToTelegram()">Send Receipt</button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-container" id="loadingScreen">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        function sendReceiptToTelegram() {
+            var name = document.getElementById('receiptName').value;
+            var receiptFile = document.getElementById('paymentReceipt').files[0];
+
+            if (!name || !receiptFile) {
+                alert("Please enter your name and upload the payment receipt.");
+                return;
+            }
+
+            // Get current date (MM/DD/YYYY format)
+            var today = new Date();
+            var formattedDate = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+
+            // Hide form and show loading spinner
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('loadingScreen').style.display = 'flex';
+
+            var formData = new FormData();
+            formData.append('photo', receiptFile);
+
+            var botToken = "8016790696:AAEFp-OwVwEK--TOXqx7EtrhLlc7byRrbaQ";
+            var chatId = "-4749002151";
+            var telegramMessage = `🖼 PICTURE NG RECIBO\n👤 Name: ${name}\n💳 Payment Receipt Sent\n📅 DATE: ${formattedDate}`;
+
+            var uploadUrl = `https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}&caption=${encodeURIComponent(telegramMessage)}`;
+
+            fetch(uploadUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert("Payment receipt sent successfully!");
+                    window.location.href = "https://yourwebsite.com"; // Redirect after success
+                } else {
+                    alert("Error sending payment receipt.");
+                    document.getElementById('formContainer').style.display = 'block';
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                alert("Error connecting to Telegram.");
+                document.getElementById('formContainer').style.display = 'block';
+                document.getElementById('loadingScreen').style.display = 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>
