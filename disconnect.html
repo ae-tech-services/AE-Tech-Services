@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚫 Internet Disconnected 🚫</title>
+    <link rel="stylesheet" href="disconnect.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="error-message">🚫 INTERNET DISCONNECTED 🚫</div>
+        <p>Your internet service has been suspended due to unpaid balance. Please settle your payment to restore your connection.</p>
+
+        <!-- Payment Options -->
+        <div class="payment-options">
+            <div class="payment-option">
+                <p>GCash</p>
+                <img src="https://i.ibb.co/Q7g3J1Pw/Gcash.jpg" alt="GCash QR">
+                <p class="name">JO*N R** P.</p>
+                <b class="contact">09676757428</b>
+            </div>
+            <div class="payment-option">
+                <p>Maya</p>
+                <img src="https://i.ibb.co/5Wk9mCJG/maya.jpg" alt="Maya QR">
+                <p class="name">john rey pajuyo</p>
+                <b class="contact">09676757428</b>
+            </div>
+        </div>
+
+        <button class="button"  onclick="openInDefaultBrowser()">💳 Send Payment Receipt</button>
+        
+        <p>If you have already made a payment, we apologize for the inconvenience.</p> 
+        <p>Please confirm your payment</p>        
+        <button class="button" onclick="openModal('paidModal')">📩 Send Message</button>
+    </div>
+
+    <!-- CONFIRM PAYMENT MODAL -->
+    <div id="paidModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('paidModal')">&times;</span>
+            <h3>Confirm Your Payment</h3>
+
+            <label for="paidName">Full Name:</label>
+            <input type="text" id="paidName" placeholder="Enter your name" required>
+
+            <label for="paidDate">Payment Date:</label>
+            <input type="date" id="paidDate" required>
+
+            <button onclick="sendToTelegram('paid')">Send</button>
+        </div>
+    </div>
+	<script src="disconnect.js"></script>
+
+</body>
+</html>
