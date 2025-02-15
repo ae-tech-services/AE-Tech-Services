@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AE Tech Services Account Registration</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <h2>AE Tech Services Account Registration</h2>
+        
+        <p>Hi! Good day.<br>
+        This is AE Tech Services (Ading) your Internet Service Provider. Kindly, fill out this form so we can provide your Account Number for better transactions.</p>
+        
+        <form id="registrationForm">
+            <div class="name-group">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+
+            <div class="contact-facebook-group">
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number:</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="facebook">Facebook Account:</label>
+                    <input type="text" id="facebook" name="facebook" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address (Block Number):</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <button type="button" onclick="sendFormDataToTelegram()">Submit</button>
+        </form>
+        
+        <div class="message">
+            <p>We sincerely appreciate your attention to this matter and look forward to your prompt response. Should you require any further information or assistance, please do not hesitate to reach out.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Contact us at: <a href="tel:+639123456789"><strong>+63 967 6757 428</strong></a></p>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="register.js"></script>
+
+</body>
+</html>
