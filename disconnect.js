@@ -5,7 +5,7 @@
     });
 
 function openInDefaultBrowser() {
-    var url = "https://ae-tech-services.github.io/AE-Tech-Services/sned.html";
+    var url = "https://ae-tech-services.github.io/AE-Tech-Services/send.html";
 
     // ✅ For Android: Open in default browser
     var androidIntent = "intent://" + url.replace("https://", "").replace("http://", "") + "#Intent;action=android.intent.action.VIEW;scheme=https;end;";
