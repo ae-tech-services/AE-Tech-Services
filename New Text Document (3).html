@@ -11,12 +11,14 @@
 </body>
 <script>
 function openInDefaultBrowser(url) {
-    var newWindow = window.open(url, "_blank");
+    setTimeout(function() {
+        var newWindow = window.open(url, "_blank");
 
-    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-        // Fallback kung hindi gumana ang window.open (dahil sa pop-up blocker)
-        window.location.href = url;
-    }
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+            // Fallback kung may pop-up blocker
+            window.location.href = url;
+        }
+    }, 100); // Small delay to bypass pop-up blocker
 }
 </script>
 </html>
