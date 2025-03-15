@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <title>Redirecting...</title>
 </head>
 <body>
-    <center><p>Redirecting to the internet...</p></center>
-	<button class="button continue" onclick="openInDefaultBrowser('https://www.google.com')">➡ Continue Surfing</button>
-
+    <center>
+        <p>Redirecting to the internet...</p>
+        <button class="button continue" onclick="openInDefaultBrowser('https://www.google.com')">➡ Continue Surfing</button>
+    </center>
 </body>
 <script>
-	function openInDefaultBrowser(url) {
-    var a = document.createElement("a");
-    a.href = url;
-    a.target = "_blank"; // Bubuksan sa default browser
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+function openInDefaultBrowser(url) {
+    var newWindow = window.open(url, "_blank");
+
+    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        // Fallback kung hindi gumana ang window.open (dahil sa pop-up blocker)
+        window.location.href = url;
+    }
 }
-	</script>
+</script>
 </html>
