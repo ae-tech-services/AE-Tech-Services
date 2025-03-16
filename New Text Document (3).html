@@ -6,12 +6,21 @@
     <title>Reminder</title>
     <script>
         function continueSurfing() {
-            var url = "http://www.google.com"; // Palitan ng desired URL
-            var newWindow = window.open(url, "_blank"); // Subukang buksan sa bagong tab
+            var url = "http://www.google.com"; // Palitan ng target URL
             
-            if (!newWindow || newWindow.closed || typeof newWindow.closed == "undefined") {
-                // Fallback kung na-block ng popup blocker
-                window.location.href = url;
+            // Para sa Android (Gamit ang Chrome)
+            var androidIntent = "intent://www.google.com#Intent;scheme=http;package=com.android.chrome;end;";
+            
+            // Para sa iPhone (Gamit ang Safari)
+            var iosScheme = "x-web-search://";
+            
+            if (navigator.userAgent.match(/Android/i)) {
+                window.location.href = androidIntent; // Force open in Chrome
+            } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                window.location.href = iosScheme; // Force open in Safari
+            } else {
+                // Default fallback (PC, ibang devices)
+                window.open(url, "_blank");
             }
         }
     </script>
