@@ -6,7 +6,13 @@
     <title>Reminder</title>
     <script>
         function continueSurfing() {
-            window.location.href = "http://www.google.com";
+            var url = "http://www.google.com"; // Palitan ng desired URL
+            var newWindow = window.open(url, "_blank"); // Subukang buksan sa bagong tab
+            
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == "undefined") {
+                // Fallback kung na-block ng popup blocker
+                window.location.href = url;
+            }
         }
     </script>
 </head>
