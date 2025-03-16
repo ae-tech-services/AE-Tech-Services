@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder</title>
+    <script>
+        function continueSurfing() {
+            window.location.href = "http://www.google.com";
+        }
+    </script>
 </head>
 <body>
-    <center>
-        <p>Redirecting to the internet...</p>
-        <button class="button continue" onclick="openInDefaultBrowser('https://www.google.com')">➡ Continue Surfing</button>
-    </center>
+    <h2>Access Restricted</h2>
+    <p>You must click below to continue surfing.</p>
+    <button onclick="continueSurfing()">Continue Surfing</button>
 </body>
-<script>
-function openInDefaultBrowser(url) {
-    setTimeout(function() {
-        var newWindow = window.open(url, "_blank");
-
-        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-            // Fallback kung may pop-up blocker
-            window.location.href = url;
-        }
-    }, 100); // Small delay to bypass pop-up blocker
-}
-</script>
 </html>
