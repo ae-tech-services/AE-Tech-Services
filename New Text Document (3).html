@@ -6,22 +6,8 @@
     <title>Reminder</title>
     <script>
         function continueSurfing() {
-            var url = "http://www.google.com"; // Palitan ng target URL
-            
-            // Para sa Android (Gamit ang Chrome)
-            var androidIntent = "intent://www.google.com#Intent;scheme=http;package=com.android.chrome;end;";
-            
-            // Para sa iPhone (Gamit ang Safari)
-            var iosScheme = "x-web-search://";
-            
-            if (navigator.userAgent.match(/Android/i)) {
-                window.location.href = androidIntent; // Force open in Chrome
-            } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                window.location.href = iosScheme; // Force open in Safari
-            } else {
-                // Default fallback (PC, ibang devices)
-                window.open(url, "_blank");
-            }
+            var intermediateURL = "https://ae-tech-services.github.io/AE-Tech-Services/allow.html";
+            window.location.href = intermediateURL;
         }
     </script>
 </head>
